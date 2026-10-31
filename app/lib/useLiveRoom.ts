@@ -70,11 +70,13 @@ export function useLiveRoom({
   const onErrorRef = useRef(onError);
   const meId = me?.id ?? null;
   const meNama = me?.nama ?? "";
+  const namaRef = useRef(meNama);
 
   useEffect(() => {
     onErrorRef.current = onError;
     isMicOnRef.current = isMicOn;
-  }, [onError, isMicOn]);
+    namaRef.current = meNama;
+  }, [onError, isMicOn, meNama]);
 
   // 1. Hubungkan ke LiveKit setelah user join room
   useEffect(() => {
@@ -131,7 +133,7 @@ export function useLiveRoom({
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
-          body: JSON.stringify({ roomId, nama: meNama }),
+          body: JSON.stringify({ roomId, nama: namaRef.current }),
         });
         const json = (await res.json().catch(() => ({}))) as {
           token?: string;
@@ -168,7 +170,7 @@ export function useLiveRoom({
       setLiveRoom(null);
       setRemotes({});
     };
-  }, [roomId, meId, meNama, enabled]);
+  }, [roomId, meId, enabled]);
 
   // 2. Kirim mikrofon
   useEffect(() => {

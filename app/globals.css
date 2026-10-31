@@ -9,6 +9,19 @@
   --border: #e7edf5;
   --background: #f7faff;
   --white: #ffffff;
+  --surface: #ffffff; /* warna permukaan: kartu, panel, latar body */
+  color-scheme: light;
+}
+
+/* Mode gelap: ubah variabel saja, komponen yang memakai var(--...) ikut berubah */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #151d2c;
+  --background: #0f1623;
+  --blue-light: #1b2c47;
+  --text: #e6edf7;
+  --muted: #93a1b5;
+  --border: #2a3547;
 }
 
 * {
@@ -27,7 +40,7 @@ body {
   margin: 0;
   font-family: "Inter", Arial, sans-serif;
   color: var(--text);
-  background: var(--white);
+  background: var(--surface);
   font-size: 14px;
 }
 
